@@ -2,7 +2,7 @@ class Api::ProductController < ApplicationController
     before_action :set_product, only: [:update, :destroy]
 
     def index
-        render json: User.all
+        render json: Product.all
     end
 
     def create
