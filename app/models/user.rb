@@ -4,7 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates_presence_of :name, :email, :telephone, :document
+  acts_as_token_authenticatable
 
-  role: [:admin, :client]
+  validates_presence_of :name, :telephone, :document
+
+  validates_uniqueness_of :email
+
+  enum role: [:admin, :client]
 end

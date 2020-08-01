@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_181818) do
+ActiveRecord::Schema.define(version: 2020_08_01_225317) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string "name"
+    t.string "street"
     t.string "number"
     t.string "cep"
     t.string "neighborhood"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_181818) do
   create_table "order_products", force: :cascade do |t|
     t.integer "order_id"
     t.integer "product_id"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
@@ -68,11 +69,9 @@ ActiveRecord::Schema.define(version: 2020_08_01_181818) do
   end
 
   create_table "sales", force: :cascade do |t|
-    t.integer "product_id"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_sales_on_product_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -96,7 +95,9 @@ ActiveRecord::Schema.define(version: 2020_08_01_181818) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "authentication_token", limit: 30
     t.index ["address_id"], name: "index_users_on_address_id"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

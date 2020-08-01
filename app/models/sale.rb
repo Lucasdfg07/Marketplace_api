@@ -1,5 +1,5 @@
 class Sale < ApplicationRecord
-    belongs_to :product
+    has_many :products
 
     validates_presence_of :price
 end
